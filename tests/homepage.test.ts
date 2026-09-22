@@ -17,6 +17,7 @@ describe('Delverium Guide homepage', () => {
     expect(html).toMatch(/Farming &amp; Building/);
     expect(html).toMatch(/unofficial fan guide/i);
     expect(html).toMatch(/official sources/i);
+    expect(html).toContain('https://store.steampowered.com/app/2710040/Delverium/');
     expect(html).not.toMatch(/tier list|best build|all recipes/i);
   });
 });

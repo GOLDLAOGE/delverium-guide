@@ -78,7 +78,7 @@ const jsonLd = [websiteJsonLd('en'), videoGameJsonLd()];
       <section class="sources" id="sources" aria-labelledby="sources-title">
         <p class="eyebrow">Source policy</p>
         <h2 id="sources-title">Built from official sources, then checked again.</h2>
-        <p>Steam and Sagestone Games materials are the starting point. Community findings may be included only with a visible verification note, so readers can tell fact from an open question.</p>
+        <p><a href="https://store.steampowered.com/app/2710040/Delverium/" rel="noopener noreferrer">Steam's official Delverium listing</a> and Sagestone Games materials are the starting point. Community findings may be included only with a visible verification note, so readers can tell fact from an open question.</p>
       </section>
     </main>
 
@@ -132,6 +132,8 @@ const jsonLd = [websiteJsonLd('en'), videoGameJsonLd()];
   .sources .eyebrow { color: #765032; }
   .sources h2 { max-width: 650px; }
   .sources > p:last-child { color: #57584e; margin-top: 22px; max-width: 720px; }
+  .sources a { color: #5d3e29; text-decoration-color: #ba744b; text-underline-offset: 3px; }
+  .sources a:hover, .sources a:focus-visible { color: #1f3020; }
   .site-footer { color: #8f9184; display: flex; font-size: .78rem; gap: 24px; justify-content: space-between; line-height: 1.55; padding: 30px 0; }
   .site-footer p { margin: 0; }
   .site-footer p:last-child { max-width: 460px; text-align: right; }

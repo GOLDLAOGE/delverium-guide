@@ -83,7 +83,7 @@ export const site: SiteConfig = {
     platform: 'Steam',
     developer: 'Sagestone Games',
     genre: 'Survival sandbox adventure',
-    releaseDate: '2026-09-22',
+    releaseDate: '2026-09-21',
   },
   // hero.webp is 1200×630 (the recommended OG share aspect ratio).
   ogImageWidth: 1200,

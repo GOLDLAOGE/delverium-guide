@@ -19,6 +19,7 @@ describe('Delverium Guide identity', () => {
     expect(site.domain).toBe('delveriumguide.com');
     expect(site.description).toMatch(/Delverium guide/i);
     expect(site.social.official).toBe('https://store.steampowered.com/app/2710040/Delverium/');
+    expect(site.game.releaseDate).toBe('2026-09-21');
     expect(site.legalNotice).toMatch(/unofficial/i);
   });
 });
