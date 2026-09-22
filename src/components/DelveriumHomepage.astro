@@ -63,13 +63,19 @@ const jsonLd = [websiteJsonLd('en'), videoGameJsonLd()];
 
     <main id="top">
       <section class="hero" aria-labelledby="page-title">
-        <p class="eyebrow">Independent guidebook · Early Access</p>
-        <h1 id="page-title">Delverium Guide</h1>
-        <p class="hero-copy">A careful, source-led companion for exploring Delverium — built to separate confirmed information from what still needs to be learned.</p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="#guides">Explore the guide map</a>
-          <a class="button button-secondary" href="https://store.steampowered.com/app/2710040/Delverium/" rel="noopener noreferrer">View on Steam <span aria-hidden="true">↗</span></a>
+        <div class="hero-copy-block">
+          <p class="eyebrow">Independent guidebook · Early Access</p>
+          <h1 id="page-title">Delverium Guide</h1>
+          <p class="hero-copy">A careful, source-led companion for exploring Delverium — built to separate confirmed information from what still needs to be learned.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#guides">Explore the guide map</a>
+            <a class="button button-secondary" href="https://store.steampowered.com/app/2710040/Delverium/" rel="noopener noreferrer">View on Steam <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
+        <a class="hero-media" href="https://store.steampowered.com/app/2710040/Delverium/" rel="noopener noreferrer">
+          <img src={officialScenes[2].src} alt="Official Steam screenshot: Dungeons" />
+          <span>Official Steam screenshot <b aria-hidden="true">↗</b></span>
+        </a>
       </section>
 
       <section class="guide-map" id="guides" aria-labelledby="guides-title">
@@ -183,13 +189,18 @@ const jsonLd = [websiteJsonLd('en'), videoGameJsonLd()];
   nav { display: flex; gap: 24px; }
   nav a { color: #c9c4b2; font-size: .83rem; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; }
   nav a:hover, nav a:focus-visible { color: #e3a170; }
-  .hero { border-bottom: 1px solid rgba(234, 223, 193, .16); padding: 132px 0 112px; position: relative; }
+  .hero { align-items: center; border-bottom: 1px solid rgba(234, 223, 193, .16); display: grid; gap: clamp(38px, 7vw, 116px); grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); padding: 112px 0; position: relative; }
   .hero::after { background: radial-gradient(circle, rgba(129, 153, 94, .2), transparent 64%); content: ''; height: 440px; pointer-events: none; position: absolute; right: -130px; top: 15px; width: 440px; }
+  .hero-copy-block, .hero-media { position: relative; z-index: 1; }
   .eyebrow { color: #ba744b; font-size: .75rem; font-weight: 700; letter-spacing: .16em; margin: 0 0 18px; text-transform: uppercase; }
   h1, h2, h3 { font-family: Georgia, 'Times New Roman', serif; }
   h1 { font-size: clamp(3.5rem, 9vw, 7.5rem); letter-spacing: -.06em; line-height: .9; margin: 0; max-width: 780px; position: relative; z-index: 1; }
   .hero-copy { color: #c9c4b2; font-size: 1.15rem; line-height: 1.7; margin: 32px 0; max-width: 620px; position: relative; z-index: 1; }
   .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; position: relative; z-index: 1; }
+  .hero-media { background: #1d201b; border: 1px solid rgba(234, 223, 193, .18); color: #f1ead9; display: block; overflow: hidden; text-decoration: none; }
+  .hero-media img { aspect-ratio: 4 / 3; display: block; filter: saturate(.9); object-fit: cover; transition: filter .2s ease, transform .2s ease; width: 100%; }
+  .hero-media:hover img, .hero-media:focus-visible img { filter: saturate(1.08); transform: scale(1.02); }
+  .hero-media span { display: block; font-size: .68rem; font-weight: 700; letter-spacing: .09em; padding: 13px 16px; text-transform: uppercase; }
   .button { border: 1px solid; font-size: .82rem; font-weight: 700; letter-spacing: .08em; padding: 14px 19px; text-decoration: none; text-transform: uppercase; }
   .button-primary { background: #ba744b; border-color: #ba744b; color: #171512; }
   .button-primary:hover, .button-primary:focus-visible { background: #e3a170; border-color: #e3a170; }
@@ -250,8 +261,9 @@ const jsonLd = [websiteJsonLd('en'), videoGameJsonLd()];
     .site-header { min-height: 70px; }
     nav { gap: 14px; }
     nav a { font-size: .67rem; }
-    .hero { padding: 94px 0 78px; }
+    .hero { display: block; padding: 94px 0 78px; }
     .hero::after { right: -240px; top: -90px; }
+    .hero-media { margin-top: 38px; }
     .section-heading, .editorial { display: block; }
     .section-heading > p:last-child { margin-top: 18px; }
     .guide-map, .overview, .scene-gallery, .editorial, .first-steps, .faq { padding: 76px 0; }
