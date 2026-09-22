@@ -22,6 +22,11 @@ describe('Delverium Guide homepage', () => {
     for (const label of ['Homestead', 'Exploration', 'Dungeons']) {
       expect(html).toMatch(new RegExp(`Official Steam screenshot: ${label}`));
     }
+    for (const section of ['About Delverium', 'Start here', 'Frequently asked questions']) {
+      expect(html).toContain(section);
+    }
+    expect(html).toContain('Official update history');
+    expect(html).toContain('Sep 21, 2026');
     expect(html).not.toMatch(/tier list|best build|all recipes/i);
   });
 });

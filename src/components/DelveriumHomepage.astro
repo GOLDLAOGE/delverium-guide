@@ -27,6 +27,20 @@ const officialScenes = [
   },
 ];
 
+const firstSteps = [
+  ['Try the demo', 'Steam lists a free Delverium demo, so it is the safest place to get a feel for the game before relying on player advice.'],
+  ['Choose your pace', 'The official listing supports solo play, shared or split-screen co-op, and online co-op — start with the mode that suits your group.'],
+  ['Track official changes', 'Early Access changes quickly. Check the Steam news hub before treating any guide detail as current.'],
+];
+
+const faqs = [
+  ['When did Delverium enter Early Access?', 'Steam lists Sep 21, 2026 as both the release date and Early Access release date.'],
+  ['How many players does Delverium support?', 'The official listing describes a one-to-eight player survival sandbox adventure.'],
+  ['Where can I play Delverium?', 'Delverium is listed for PC on Steam.'],
+  ['Does Delverium support co-op?', 'Yes. Steam lists online co-op and shared or split-screen co-op support.'],
+  ['Is Delverium Guide official?', 'No. This is an unofficial fan guide; Steam and Sagestone Games sources take priority when facts change.'],
+];
+
 const jsonLd = [websiteJsonLd('en'), videoGameJsonLd()];
 ---
 
@@ -82,6 +96,17 @@ const jsonLd = [websiteJsonLd('en'), videoGameJsonLd()];
         <p><strong>Early Access</strong><span>Development status</span></p>
       </section>
 
+      <section class="overview" aria-labelledby="overview-title">
+        <div>
+          <p class="eyebrow">Game overview</p>
+          <h2 id="overview-title">About Delverium</h2>
+        </div>
+        <div class="overview-copy">
+          <p>Delverium is a 2D pixel survival sandbox adventure from Sagestone Games. Its official Steam listing describes a procedurally generated world where one to eight players can explore, gather resources, build shelters, tend farms, craft items, recruit NPCs, and venture into caves and dungeons.</p>
+          <a href="https://store.steampowered.com/app/2710040/Delverium/" rel="noopener noreferrer">Read the official Steam overview <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
       <section class="scene-gallery" aria-labelledby="scenes-title">
         <div class="section-heading">
           <p class="eyebrow">From the official listing</p>
@@ -106,6 +131,33 @@ const jsonLd = [websiteJsonLd('en'), videoGameJsonLd()];
           <h2 id="about-title">Useful without pretending to know more than we do.</h2>
         </div>
         <p>Delverium is changing in Early Access. This guide will publish only confirmed gameplay information, link it to official sources where possible, and label unverified player observations plainly.</p>
+      </section>
+
+      <section class="first-steps" aria-labelledby="first-steps-title">
+        <div class="section-heading">
+          <p class="eyebrow">A clear first visit</p>
+          <h2 id="first-steps-title">Start here</h2>
+          <p>Use official information as the baseline, then let detailed guides earn their place.</p>
+        </div>
+        <ol>
+          {firstSteps.map(([title, description], index) => (
+            <li>
+              <span>0{index + 1}</span>
+              <div><h3>{title}</h3><p>{description}</p></div>
+            </li>
+          ))}
+        </ol>
+        <a class="update-link" href="https://store.steampowered.com/news/app/2710040" rel="noopener noreferrer">Official update history <span aria-hidden="true">↗</span></a>
+      </section>
+
+      <section class="faq" aria-labelledby="faq-title">
+        <p class="eyebrow">Quick facts</p>
+        <h2 id="faq-title">Frequently asked questions</h2>
+        <div class="faq-grid">
+          {faqs.map(([question, answer]) => (
+            <article><h3>{question}</h3><p>{answer}</p></article>
+          ))}
+        </div>
       </section>
 
       <section class="sources" id="sources" aria-labelledby="sources-title">
@@ -159,6 +211,10 @@ const jsonLd = [websiteJsonLd('en'), videoGameJsonLd()];
   .trust-strip strong, .trust-strip span { display: block; }
   .trust-strip strong { font-family: Georgia, serif; font-size: 1.25rem; }
   .trust-strip span { color: #9da093; font-size: .75rem; margin-top: 5px; text-transform: uppercase; }
+  .overview { display: grid; gap: 64px; grid-template-columns: 1fr 1fr; padding: 108px 0 0; }
+  .overview-copy p { color: #c9c4b2; font-size: 1.08rem; line-height: 1.75; margin: 0; }
+  .overview-copy a, .update-link { color: #e3a170; display: inline-block; font-size: .78rem; font-weight: 700; letter-spacing: .08em; margin-top: 22px; text-decoration: none; text-transform: uppercase; }
+  .overview-copy a:hover, .overview-copy a:focus-visible, .update-link:hover, .update-link:focus-visible { color: #f1ead9; }
   .scene-gallery { padding: 108px 0 0; }
   .scene-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
   .scene-grid a { color: inherit; text-decoration: none; }
@@ -169,6 +225,16 @@ const jsonLd = [websiteJsonLd('en'), videoGameJsonLd()];
   .scene-grid figcaption span { color: #9da093; display: block; font-family: system-ui, sans-serif; font-size: .68rem; letter-spacing: .08em; margin-top: 5px; text-transform: uppercase; }
   .editorial { display: grid; gap: 64px; grid-template-columns: 1fr 1fr; padding: 108px 0; }
   .editorial > p, .sources > p:last-child { color: #c9c4b2; font-size: 1.08rem; line-height: 1.75; margin: 0; }
+  .first-steps { padding: 108px 0; }
+  .first-steps ol { border-top: 1px solid rgba(234, 223, 193, .16); list-style: none; margin: 38px 0 0; padding: 0; }
+  .first-steps li { align-items: start; border-bottom: 1px solid rgba(234, 223, 193, .16); display: grid; gap: 28px; grid-template-columns: 52px 1fr; padding: 28px 0; }
+  .first-steps li > span { color: #81995e; font-size: .78rem; font-weight: 700; letter-spacing: .08em; padding-top: 5px; }
+  .first-steps h3, .faq h3 { font-size: 1.35rem; margin: 0 0 8px; }
+  .first-steps li p, .faq p { color: #aaa999; line-height: 1.6; margin: 0; max-width: 650px; }
+  .faq { border-top: 1px solid rgba(234, 223, 193, .16); padding: 108px 0; }
+  .faq > h2 { margin-bottom: 38px; }
+  .faq-grid { display: grid; gap: 1px; grid-template-columns: repeat(2, 1fr); background: rgba(234, 223, 193, .16); border: 1px solid rgba(234, 223, 193, .16); }
+  .faq-grid article { background: #1d201b; padding: 28px; }
   .sources { background: #d9d1bc; color: #25241e; margin: 0 -32px; padding: 78px 32px; }
   .sources .eyebrow { color: #765032; }
   .sources h2 { max-width: 650px; }
@@ -188,12 +254,15 @@ const jsonLd = [websiteJsonLd('en'), videoGameJsonLd()];
     .hero::after { right: -240px; top: -90px; }
     .section-heading, .editorial { display: block; }
     .section-heading > p:last-child { margin-top: 18px; }
-    .guide-map, .scene-gallery, .editorial { padding: 76px 0; }
+    .guide-map, .overview, .scene-gallery, .editorial, .first-steps, .faq { padding: 76px 0; }
     .guide-grid { grid-template-columns: 1fr; }
     .guide-card { min-height: auto; }
     .trust-strip { grid-template-columns: 1fr; margin: 0 -20px; padding: 24px 20px; row-gap: 22px; }
     .sources { margin: 0 -20px; padding: 58px 20px; }
     .scene-grid { grid-template-columns: 1fr; }
+    .overview { display: block; }
+    .overview-copy { margin-top: 24px; }
+    .faq-grid { grid-template-columns: 1fr; }
     .site-footer { display: block; }
     .site-footer p + p { margin-top: 12px; }
     .site-footer p:last-child { text-align: left; }
