@@ -13,6 +13,16 @@ import {
 import { fallbackDetailPaths } from '~/lib/fallback-paths';
 import { site } from '~/config/site';
 
+describe('Delverium Guide identity', () => {
+  it('exposes an unofficial, canonical Delverium Guide identity to SEO helpers', () => {
+    expect(site.name).toBe('Delverium Guide');
+    expect(site.domain).toBe('delveriumguide.com');
+    expect(site.description).toMatch(/Delverium guide/i);
+    expect(site.social.official).toBe('https://store.steampowered.com/app/2710040/Delverium/');
+    expect(site.legalNotice).toMatch(/unofficial/i);
+  });
+});
+
 /** Repo-root-relative source text (contract-test helper, handbook.test.ts style). */
 const src = (rel: string) => readFileSync(fileURLToPath(new URL(`../${rel}`, import.meta.url)), 'utf8');
 
@@ -133,8 +143,8 @@ describe('SEO helpers', () => {
     });
 
     it('skips the suffix when the title already carries the game name', () => {
-      const t = pageTitle('Anvil Quest Boss Guide');
-      expect(t).toBe('Anvil Quest Boss Guide');
+      const t = pageTitle('Delverium Boss Guide');
+      expect(t).toBe('Delverium Boss Guide');
     });
 
     it('switches to the short suffix for long titles (>50 chars)', () => {

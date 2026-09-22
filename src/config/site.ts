@@ -62,35 +62,28 @@ export interface SiteConfig {
 }
 
 export const site: SiteConfig = {
-  name: 'Anvil Quest Wiki',
-  shortName: 'AQ Wiki',
+  name: 'Delverium Guide',
+  shortName: 'Delverium',
   description:
-    'Complete Anvil Quest wiki with boss guides, tier lists, codes, item locations, and beginner tips. Every guide carries a last-verified date.',
-  domain: 'anvil.wiki',
-  tagline: 'Your forge for everything Anvil Quest',
+    'Delverium guide for getting started, co-op, crafting, farming, building, dungeons, and Early Access updates — sourced from official information and clearly labeled verification.',
+  domain: 'delveriumguide.com',
+  tagline: 'Source-verified guides for Delverium Early Access',
   legalNotice:
-    'Anvil Quest Wiki is a fan-made community site. Not affiliated with or endorsed by the game developer.',
+    'Delverium Guide is an unofficial fan guide. Not affiliated with or endorsed by Sagestone Games.',
   // 👉 APPLY TEMPLATE: set a real address if you run no social channels —
   // the contact page renders it as a mailto link.
   contactEmail: '',
   social: {
-    official: 'https://example.com/anvil-quest',
-    discord: 'https://discord.gg/example',
-    youtube: 'https://youtube.com/@example',
-    twitter: 'https://twitter.com/example',
-    reddit: 'https://reddit.com/r/anvilquest',
+    official: 'https://store.steampowered.com/app/2710040/Delverium/',
   },
   // 👉 APPLY TEMPLATE: point these at the game's real canonical pages.
-  sameAs: [
-    'https://example.com/anvil-quest',
-    'https://en.wikipedia.org/wiki/Anvil_Quest',
-  ],
+  sameAs: ['https://store.steampowered.com/app/2710040/Delverium/'],
   game: {
-    name: 'Anvil Quest',
-    platform: 'Roblox',
-    developer: 'Forge Studios',
-    genre: 'Fantasy RPG',
-    releaseDate: '2026-01-15',
+    name: 'Delverium',
+    platform: 'Steam',
+    developer: 'Sagestone Games',
+    genre: 'Survival sandbox adventure',
+    releaseDate: '2026-09-22',
   },
   // hero.webp is 1200×630 (the recommended OG share aspect ratio).
   ogImageWidth: 1200,

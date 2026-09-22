@@ -990,12 +990,12 @@ describe('re-run identity detection (S12: re-run = confirm current, never demo d
     expect(empty.releaseDate).toBe('');
   });
 
-  test('the shipped demo site.ts parses as the demo identity (drift guard)', () => {
+  test('a rebranded site.ts is never mistaken for the shipped demo identity', () => {
     const raw = readFileSync(join(repoRoot, 'src/config/site.ts'), 'utf8');
     const id = parseSiteTsIdentity(raw);
     expect(id).not.toBeNull();
-    expect(isDemoSiteTsIdentity(id!)).toBe(true);
-    expect(DEMO_DOMAINS).toContain(id!.domain);
+    expect(isDemoSiteTsIdentity(id!)).toBe(false);
+    expect(DEMO_DOMAINS).not.toContain(id!.domain);
   });
 });
 
