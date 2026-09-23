@@ -1,11 +1,11 @@
 {
-  "name": "Anvil Quest Wiki",
-  "short_name": "AQ Wiki",
-  "description": "Complete Anvil Quest wiki with boss guides, codes, and tier lists.",
+  "name": "Delverium Guide",
+  "short_name": "Delverium",
+  "description": "A source-led guide for Delverium: co-op, crafting, farming, building, dungeons, and Early Access updates.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#f36716",
+  "background_color": "#151714",
+  "theme_color": "#ba744b",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

@@ -21,7 +21,6 @@ import {
   DEMO_ARTICLE_IMAGES,
   DEMO_COVERS,
   DEMO_DOMAINS,
-  DEMO_GAME_NAMES,
   DEMO_GALLERY_IMAGES,
   DEMO_INDEXNOW_KEY_FILE,
   DEMO_PUBLIC_FILES,
@@ -31,7 +30,6 @@ import {
   buildUiImports,
   buildUiMessagesEntries,
   classifyWikiArticles,
-  isDemoArticleContent,
   isDemoLocaleContent,
   isDemoPublicFileContent,
   isDemoSiteTsIdentity,
@@ -593,7 +591,7 @@ describe('demo asset inventories stay in sync with setup.yml (drift has shipped 
     ).toBe(true);
   });
 
-  test('every demo public file is covered by the content registry (no silent-keep holes)', () => {
+  test('launch removes every registered demo public file', () => {
     for (const rel of DEMO_PUBLIC_FILES) {
       // The exact-name files (search-console token, retired pre-env IndexNow
       // key file) have no content marker — their identity IS the name.
@@ -603,12 +601,11 @@ describe('demo asset inventories stay in sync with setup.yml (drift has shipped 
     // The retired key file is deleted by exact name regardless of content —
     // forks initialized from older trees must lose it on the next rerun.
     expect(isDemoPublicFileContent(DEMO_INDEXNOW_KEY_FILE, 'any content')).toBe(true);
-    // Registry keys must match the shipped demo unit files — a regenerated
-    // demo key without updating the registry would silently keep demo
-    // residue in forks (isDemoPublicFileContent defaults to keep).
-    for (const [rel, marker] of Object.entries(DEMO_ADSTERRA_UNIT_MARKERS)) {
-      const source = readFileSync(join(repoRoot, 'public', rel), 'utf8');
-      expect(source, rel).toContain(marker);
+    // A production game site must not retain the template's units. The
+    // registry stays unit-tested above so the clear script remains safe if
+    // this project later adds its own ad integration.
+    for (const rel of Object.keys(DEMO_ADSTERRA_UNIT_MARKERS)) {
+      expect(existsSync(join(repoRoot, 'public', rel)), rel).toBe(false);
     }
   });
 
@@ -784,7 +781,7 @@ describe('demo locale deletion is content-aware (rebranded locales must survive 
 });
 
 describe('demo article clearing is content-aware (re-runs must keep user work)', () => {
-  test('every shipped demo article carries the demo-game marker (marker drift guard)', () => {
+  test('launch removes every shipped demo article', () => {
     // Mirrors the locale marker guard above: if a template author ships a demo
     // article that never mentions the demo game, content-aware clearing would
     // KEEP it forever — this goes red in the template repo until the article
@@ -801,13 +798,7 @@ describe('demo article clearing is content-aware (re-runs must keep user work)',
           )
         : [];
     const files = walk(base);
-    expect(files.length, 'the template repo should ship demo wiki articles').toBeGreaterThan(0);
-    for (const file of files) {
-      expect(
-        isDemoArticleContent(readFileSync(file, 'utf8')),
-        `${file} lacks the demo-game marker (${DEMO_GAME_NAMES.join(', ')}) — content-aware clearing would keep it`,
-      ).toBe(true);
-    }
+    expect(files, 'Delverium launch must not retain Anvil Quest demo articles').toEqual([]);
   });
 
   test('the verdict is content-only: same path flips when rewritten for the fork game', () => {
