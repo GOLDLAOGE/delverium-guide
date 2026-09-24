@@ -18,7 +18,7 @@ export function organizationJsonLd() {
     name: site.name,
     url: siteUrl,
     logo: `${siteUrl}/android-chrome-512x512.png`,
-    image: `${siteUrl}/images/hero.webp`,
+    image: `${siteUrl}/android-chrome-512x512.png`,
     description: site.description,
     // Entity association: link the wiki to the game's canonical pages
     // (Steam / official site / Wikipedia) — knowledge-graph signal.

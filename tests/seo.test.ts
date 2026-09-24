@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import {
   organizationJsonLd,
@@ -36,6 +36,10 @@ describe('SEO helpers', () => {
       expect(typeof json.name).toBe('string');
       expect(json.url).toMatch(/^https?:\/\//);
       expect(json.logo).toMatch(/\.png$/);
+      const imagePath = new URL(json.image).pathname;
+      expect(existsSync(fileURLToPath(new URL(`../public${imagePath}`, import.meta.url)))).toBe(
+        true,
+      );
     });
   });
 
