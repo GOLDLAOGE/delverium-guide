@@ -503,13 +503,8 @@ describe('setup.yml python [vars] rewrite is value-aware (executes the real here
     expect(pyValues).toEqual([...DEMO_VAR_VALUES].sort());
   });
 
-  test.skipIf(!hasPython3)('the FORKER warning block is actually removed (real-header fixture), and absence warns instead of failing', () => {
-    // Pinned against the REAL shipping header (authors.ts precedent): if the
-    // wrangler.toml anchors drift, this goes red instead of the workflow
-    // silently leaving a block that lies about the file still being demo.
-    const real = readFileSync(join(root, 'wrangler.toml'), 'utf8');
-    const header = real.slice(0, real.indexOf('END FORKER WARNING') + 'END FORKER WARNING'.length);
-    expect(header).toContain('FORKERS READ THIS FIRST');
+  test.skipIf(!hasPython3)('the legacy FORKER warning block is removed, and absence warns instead of failing', () => {
+    const header = '# ⚠️ FORKERS READ THIS FIRST ⚠️\n# Demo site values follow.\n# ⚠️ END FORKER WARNING ⚠️';
     const { out } = runVarsRewrite(`${header}\n\n${demoVars}`);
     expect(out).not.toContain('FORKERS');
     // Absence is warn-not-exit: a fork that deleted the block by hand must

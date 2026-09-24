@@ -239,37 +239,18 @@ describe('rewriteWranglerVars is value-aware (a re-run must not wipe the user en
     expect(rewriteWranglerVars(makeInput(), demoOnce)).toBe(demoOnce);
   });
 
-  test('DEMO_VAR_VALUES covers every live value in the shipped wrangler.toml (drift guard)', () => {
-    // If the demo gains a new non-empty env value that is not registered as a
-    // demo value, a re-run would PRESERVE it into every fork — the exact leak
-    // this list exists to prevent. Every uncommented [vars] value must either
-    // be listed here or be empty.
+  test('the shipped Delverium config contains no template demo integration values', () => {
     const toml = readFileSync(join(repoRoot, 'wrangler.toml'), 'utf8');
     const section = toml.match(/(?:^|\n)\[vars\]\r?\n([\s\S]*?)(?=\r?\n\[|$)/)?.[1] ?? '';
-    const values = [...section.matchAll(/^([A-Za-z_][A-Za-z0-9_]*)\s*=\s*"(.*)"\s*$/gm)].map(
-      (m) => m[2],
+    const values = Object.fromEntries(
+      [...section.matchAll(/^([A-Za-z_][A-Za-z0-9_]*)\s*=\s*"(.*)"\s*$/gm)].map((m) => [m[1], m[2]]),
     );
-    expect(values.length, 'the shipped wrangler.toml should carry demo values').toBeGreaterThan(0);
-    // "pathname" is the template's GENERIC giscus mapping default (a user may
-    // legitimately set "url"/"topic" — the rewrite preserves those), not demo
-    // identity; it is deliberately not in DEMO_VAR_VALUES. "Announcements" is
-    // deliberately not registered either (real forks legitimately use that
-    // giscus category name) — its demo-ness is the PAIRED rule: demo category
-    // name + demo category ID together, asserted below. Anything else
-    // non-empty must be registered.
-    const genericDefaults = new Set(['pathname']);
-    for (const v of values) {
-      expect(
-        v === '' || genericDefaults.has(v) || v === 'Announcements' || DEMO_VAR_VALUES.includes(v),
-        `unregistered demo value: "${v}"`,
-      ).toBe(true);
+    expect(values.SITE_URL).toBe('https://delveriumguide.com');
+    for (const [key, value] of Object.entries(values)) {
+      if (key === 'SITE_URL' || key === 'PUBLIC_GISCUS_MAPPING') continue;
+      expect(value, `${key} must stay disabled until this site's own credentials are set`).toBe('');
     }
-    // Paired-rule guard: the shipped file must carry Announcements TOGETHER
-    // with the demo category ID (only that pair is auto-cleared; a fork with
-    // its own ID keeps the name).
-    if (values.includes('Announcements')) {
-      expect(values).toContain('DIC_kwDOT1aRPc4DDODo');
-    }
+    expect(Object.values(values).some((value) => DEMO_VAR_VALUES.includes(value))).toBe(false);
   });
 });
 
